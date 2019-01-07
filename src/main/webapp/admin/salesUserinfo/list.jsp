@@ -1,29 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" type="text/css" href="<%=basePath%>js/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath%>js/themes/icon.css">
+<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#dg').datagrid({   
+		    url:'<%=basePath%>admin/salesUserinfo/findAll',   
+		    fitColumns:true,
+		    title:'用户管理',
+		    pagination:true,
+		    toolbar: '#tb',
+		    columns:[[   
+		        {field:'uid',title:'uid',checkbox:false,width:100},   
+		        {field:'truename',title:'truename',width:100},   
+		        
+				{field:'xxx',title:'操作',width:100,align:'center',formatter: function(value,row,index){
+					var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.infoid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">remove</a>";
+					btns += "&nbsp;&nbsp;&nbsp;&nbsp;<a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">update</a>";
+					return btns;
+				}} 
+		    ]],
+		    onLoadSuccess: function(index,field,value){
+				$('.easyui-linkbutton').linkbutton({   
+				});  
+			}  
+		}); 
+	});
+	
+	function deleteItem(infoid){
+		$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){   
+		    if (r){   
+		       $.getJSON("saleInfo_delete",{infoid:infoid},function(json){
+		    	   $('#dg').datagrid('reload'); 
+		    	   $.messager.show({
+		    			title:'My Title',
+		    			msg:json.msg,
+		    			timeout:5000,
+		    			showType:'slide'
+		    		});
+		       });
+		    }   
+		});  
+	}
+	
+</script>
 <body>
-<TABLE border="1" width="100%">
-<TR>
-	<TD>uid</TD>
-	<TD>uname</TD>
-	<TD>role</TD>
-	<TD>operate</TD>
-</TR>
-<c:forEach items="${list}" var="userinfo">
-<TR>
-	<TD>${userinfo.uid}</TD>
-	<TD>${userinfo.uname}</TD>
-	<TD>${userinfo.roles}</TD>
-	<TD><a href="findById?uid=${userinfo.uid }">update</a></TD>
-</TR>
-</c:forEach>
-</TABLE>
-<a href="goInput">ADD</a>
+
+
+<table id="dg"></table>
+<script type="text/javascript">  
+    function qq(value,name){   
+        alert(value+":"+name)   
+    }   
+</script>  
+  
+<input id="ss" class="easyui-searchbox" style="width:300px"  
+        data-options="searcher:qq,prompt:'Please Input Value',menu:'#mm'"></input>  
+           
+<div id="mm" style="width:120px">  
+    <div data-options="name:'all',iconCls:'icon-ok'">All News</div>  
+    <div data-options="name:'sports'">Sports News</div>  
+</div> 
+
+<div id="tb">
+<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">增加</a>
+<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量删除</a>
+</div>
+
+
 </body>
 </html>

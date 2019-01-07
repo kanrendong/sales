@@ -1,12 +1,15 @@
 package com.woniuxy.action.salesUserinfo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.woniuxy.domain.SalesUserinfo;
 import com.woniuxy.service.SalesRoleService;
@@ -21,12 +24,20 @@ public class SalesUserinfoAction {
 	@Resource
 	private SalesRoleService salesRoleService;
 	
+//	@RequestMapping("findAll")
+//	public String findAll(ModelMap map){
+//		List list = salesUserinfoService.findAll();
+//		map.put("list", list);
+//		return "/admin/salesUserinfo/list";
+//	}
 	@RequestMapping("findAll")
-	public String findAll(ModelMap map){
+	public @ResponseBody Map findAll(){
 		List list = salesUserinfoService.findAll();
-		map.put("list", list);
-		return "/admin/userinfo/list";
+		Map map = new HashMap();
+		map.put("rows", list);
+		return map;
 	}
+	
 	@RequestMapping("save")
 	public String save(SalesUserinfo info,int[] rids){
 		System.out.println(info.getUname());
@@ -53,7 +64,7 @@ public class SalesUserinfoAction {
 	public String goInput(ModelMap map){
 		List roles = salesRoleService.findAll();
 		map.put("roles", roles);
-		return "/admin/userinfo/input";
+		return "/admin/salesUserinfo/input";
 	}
 	
 }
