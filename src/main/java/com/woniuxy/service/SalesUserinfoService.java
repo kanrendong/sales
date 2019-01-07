@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.woniuxy.domain.Page;
 import com.woniuxy.domain.SalesUserRoleExample;
 import com.woniuxy.domain.SalesUserRoleKey;
 import com.woniuxy.domain.SalesUserinfo;
@@ -92,6 +94,11 @@ public class SalesUserinfoService {
 		}
 	}
 	@Transactional(readOnly=true)
+	public List findAll(Page page){
+		return salesUserinfoMapper.selectByExample(null,new RowBounds(page.getBegin(), page.getRows()));
+	}
+	
+	@Transactional(readOnly=true)
 	public List findAll(){
 		return salesUserinfoMapper.selectByExample(null);
 	}
@@ -99,5 +106,10 @@ public class SalesUserinfoService {
 	@Transactional(readOnly=true)
 	public SalesUserinfo findById(Integer uid){
 		return salesUserinfoMapper.selectByPrimaryKey(uid);
+	}
+	
+	@Transactional(readOnly=true)
+	public int countAll(){
+		return salesUserinfoMapper.countByExample(null);
 	}
 }

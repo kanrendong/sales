@@ -4,6 +4,7 @@ import com.woniuxy.domain.SalesUserinfo;
 import com.woniuxy.domain.SalesUserinfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface SalesUserinfoMapper {
     /**
@@ -52,6 +53,8 @@ public interface SalesUserinfoMapper {
      *
      * @mbggenerated Wed Jan 02 18:00:43 CST 2019
      */
+    List<SalesUserinfo> selectByExample(SalesUserinfoExample example,RowBounds rb);
+    
     List<SalesUserinfo> selectByExample(SalesUserinfoExample example);
 
     /**

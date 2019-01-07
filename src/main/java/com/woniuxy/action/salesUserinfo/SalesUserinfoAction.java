@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.woniuxy.domain.Page;
 import com.woniuxy.domain.SalesUserinfo;
 import com.woniuxy.service.SalesRoleService;
 import com.woniuxy.service.SalesUserinfoService;
@@ -31,9 +32,11 @@ public class SalesUserinfoAction {
 //		return "/admin/salesUserinfo/list";
 //	}
 	@RequestMapping("findAll")
-	public @ResponseBody Map findAll(){
-		List list = salesUserinfoService.findAll();
+	public @ResponseBody Map findAll(Page page){
+		List<SalesUserinfo> list = salesUserinfoService.findAll(page);
+		int total =salesUserinfoService.countAll();
 		Map map = new HashMap();
+		map.put("total", total);
 		map.put("rows", list);
 		return map;
 	}
