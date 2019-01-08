@@ -20,10 +20,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <FORM METHOD=POST ACTION="${userinfo==null?'save':'update'}">
 <input type="hidden" name="uid" value="${userinfo.uid }">
 uname	<INPUT TYPE="text" NAME="uname" value="${userinfo.uname }"><br>
+truename	<INPUT TYPE="text" NAME="truename"><br>
 upass	<INPUT TYPE="text" NAME="upass"><br>
 请选择您要使用的角色：<br>
-<c:forEach items="${roles}" var="role">
-<INPUT TYPE="checkbox" NAME="rids" value="${role.rid }">${role.rolename }
+<c:forEach items="${salesRole}" var="role">
+<INPUT TYPE="checkbox" NAME="roleids" value="${role.roleid }">${role.rolename }
 </c:forEach>
 <br>
 <input type="submit" value="${userinfo==null?'save':'update'}">

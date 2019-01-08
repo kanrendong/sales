@@ -52,11 +52,11 @@ public class SalesUserinfoService {
 	 * @throws   
 	 */ 
 	@Transactional
-	public void save(SalesUserinfo info,int[] rids){
+	public void save(SalesUserinfo info,int[] roleids){
 		salesUserinfoMapper.insert(info);
-		if(rids.length>0)
+		if(roleids.length>0)
 		{
-			for (int i : rids) {
+			for (int i : roleids) {
 				SalesUserRoleKey key = new SalesUserRoleKey();
 				key.setUid(info.getUid());
 				key.setRoleid(i);
@@ -74,7 +74,7 @@ public class SalesUserinfoService {
 	 * @throws   
 	 */ 
 	@Transactional
-	public void update(SalesUserinfo info,int[] rids){
+	public void update(SalesUserinfo info,int[] roleids){
 		salesUserinfoMapper.updateByPrimaryKeySelective(info);
 		
 		//先删除完这个用户的所有角色
@@ -83,9 +83,9 @@ public class SalesUserinfoService {
 		salesUserRoleMapper.deleteByExample(example);
 		//先删除完这个用户的所有角色
 		
-		if(rids.length>0)
+		if(roleids.length>0)
 		{
-			for (int i : rids) {
+			for (int i : roleids) {
 				SalesUserRoleKey key = new SalesUserRoleKey();
 				key.setUid(info.getUid());
 				key.setRoleid(i);

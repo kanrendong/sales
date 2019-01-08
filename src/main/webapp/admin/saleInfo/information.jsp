@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function deleteItem(infoid){
 		$.messager.confirm('Confirm','你确定要删除这条记录吗?',function(r){
 		    if (r){   
-		       $.getJSON("<%=basePath%>saleInfo/delete",{infoid:infoid},function(json){
+		       $.getJSON("<%=basePath%>/admin/saleInfo/delete",{infoid:infoid},function(json){
 		    	   $('#dg').datagrid('reload'); 
 		    	   $.messager.show({
 		    			title:'My Title',

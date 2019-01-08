@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -19,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	$(function(){
 		$('#dg').datagrid({   
-		    url:'<%=basePath%>admin/salesUserinfo/findAll',   
+		    url:'<%=basePath%>admin/salesUserinfo/find',   
 		    fitColumns:true,
 		    title:'用户管理',
 		    pagination:true,
@@ -29,8 +30,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        {field:'truename',title:'truename',width:100},   
 		        
 				{field:'xxx',title:'操作',width:100,align:'center',formatter: function(value,row,index){
-					var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.infoid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">remove</a>";
-					btns += "&nbsp;&nbsp;&nbsp;&nbsp;<a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">update</a>";
+					var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.uid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">remove</a>";
+					btns += "&nbsp;&nbsp;&nbsp;&nbsp;<a id=\"btn\" href=\"<%=basePath%>admin/salesUserinfo/findById\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">update</a>";
 					return btns;
 				}} 
 		    ]],
@@ -41,52 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}); 
 	});
 	
-	function deleteItem(infoid){
-		$.messager.confirm('Confirm','你确定要删除这条记录吗？',function(r){   
-		    if (r){   
-		       $.getJSON("saleInfo_delete",{infoid:infoid},function(json){
-		    	   $('#dg').datagrid('reload'); 
-		    	   $.messager.show({
-		    			title:'My Title',
-		    			msg:json.msg,
-		    			timeout:5000,
-		    			showType:'slide'
-		    		});
-		       });
-		    }   
-		});  
-	}
 	
-	function showsave(){
-		$('#ff').form('clear');	// 从URL加载 
-
-
-		$('#win').window('open');  // open a window   
-
-	}
-	
-	function dosave(){
-		$('#ff').form('submit', {   
-		    url:'<%=basePath%>admin/salesUserinfo/save',   
-		    onSubmit: function(){
-		    	
-		    },   
-		    success:function(data){   
-		         var json = eval("("+data+")");
-		         $('#dg').datagrid('reload');    // reload the current page data  
-		    	   $.messager.show({
-		    			title:'My Title',
-		    			msg:json.msg,
-		    			timeout:5000,
-		    			showType:'slide'
-		    		});
-		    	   $('#win').window('close');  // close a window  
-
-		    }   
-		});  
-
-		
-	}
 	
 </script>
 <body>
@@ -108,27 +64,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div> 
 
 <div id="tb">
-<a href="javascript:showsave()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">增加</a>
-<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量删除</a>
+<a href="<%=basePath%>admin/salesUserinfo/findById?uid=${userinfo.uid }" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">增加</a>
 </div>
-
-<!-- 添加的窗口 -->
-<div id="win" class="easyui-window" title="My Window" style="width:600px;height:400px"
-        data-options="iconCls:'icon-save',modal:true,closed:true">  
-<form id="ff" method="post">  
-    <div>  
-        <label for="name">Name:</label>  
-        <input class="easyui-validatebox" type="text" name="uname" data-options="required:true" />  
-    </div>  
-    <div>  
-        <label for="email">Email:</label>  
-        <input class="easyui-validatebox" type="text" name="upass" data-options="validType:'email'" />  
-    </div>  
-    <div>  
-        <a id="btn" href="javascript:dosave()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">维护</a>  
-        
-    </div>     
-</form>  
 
 
 </body>

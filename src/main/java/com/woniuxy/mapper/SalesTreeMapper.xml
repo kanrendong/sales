@@ -7,9 +7,9 @@
 	(SELECT roleid FROM sales_user_role WHERE uid =#{uid}))
   </select>
   <select id="findByRid" resultMap="BaseResultMap" parameterType="int">
-  	SELECT * FROM tree WHERE id IN
+  	SELECT * FROM sales_tree WHERE treeid IN
 	(
-	SELECT id FROM roletree WHERE rid=#{rid})
+	SELECT treeid FROM sales_tree_role WHERE roleid=#{roleid})
   </select>
   <resultMap id="BaseResultMap" type="com.woniuxy.domain.SalesTree" >
     <!--
