@@ -24,11 +24,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 类别：定义的类别是那种，现在需要确定好 A B C D是否可以！OK
  -->
 
-<div style="margin-left:60px;margin-top:20px;width:700px">
-	<form action="">
+<div style="margin-left:60px;margin-top:20px;width:700px;height:600px">
+
+<div style="margin-left:15px;">
+<form  action="uploadFile" method="post"  enctype="multipart/form-data">
+<div class="row">
+  <div class="input-group">
+    <div class="input-group">
+      <input type="file" name="file" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">导入Excel文件</button>
+      </span>
+    </div>
+  </div>
+</div>
+</form></div>
+
+
+<p><p><p>
+<hr>
+	<form action="saveInfomation" method="post">
 		<div class="input-group input-group-lg">
 		  <span class="input-group-addon" id="sizing-addon1">咨询日期</span>
-		  <input type="text" class="form-control" name="infodate" placeholder="2018-12-12" aria-describedby="sizing-addon1">
+		  <input type="text" class="form-control" name="infodate" placeholder="2018/12/12" aria-describedby="sizing-addon1">
 		</div><p>
 		
 		<div class="input-group input-group-lg">
@@ -40,10 +58,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 <button type="button" class="btn btn-large">性别</button>
 		
 		<label>
-		<input type="radio" name="sex" value="sex" checked>男
+		<input type="radio" name="sex" value="1" checked>男
 		</label>
 		<label>
-		<input type="radio" name="sex"  value="sex">女
+		<input type="radio" name="sex"  value="0">女
 		</label></div>
 	
 			<div class="input-group input-group-lg">
@@ -92,13 +110,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="input-group input-group-lg">
 		<span class="input-group-addon" id="sizing-addon1">TMK</span>
 		<input type="text" class="form-control" name="beforetmk"  aria-describedby="sizing-addon1"><p>
-		</div>
+		</div><p>
 	
 		<div class="input-group input-group-lg">
 		  <span class="input-group-addon" id="sizing-addon1">咨询师</span>
 		  <input type="text" class="form-control" name="uid"  aria-describedby="sizing-addon1">
-		</div>
-		<button type="button" class="btn btn-large">性别</button>
+		</div><p>
+		<p>
+		<button type="submit" class="btn btn-large">录入信息</button>
 	</form>
 </div>
 </body>
