@@ -19,50 +19,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	$(function(){
 		$('#dg').datagrid({   
-		    url:'<%=basePath%>admin/saleInfo/findAll',   
+		    url:'<%=basePath%>admin/visit/findAll',   
 		    fitColumns:true,
 		    title:'用户管理',
 		    pagination:true,
 		    toolbar: '#tb',
 		    columns:[[   
-		        {field:'infoid',title:'编号',checkbox:true,width:100},   
-		        {field:'infoname',title:'姓名',width:100},   
-			        {field:'sex',title:'性别',width:100,align:'center',formatter: function(value,row,index){
-						if (value){
-							return "男";
-						} else {
-							return "女";
-						}
-					}
-				},   
-		        {field:'age',title:'年龄',width:100,align:'center',styler: function(value,row,index){
-						if (value < 20){
-							return 'color:green';
-						}else if(value<50)
-							return 'color:black';
-						else
-							return "color:red";
-					}
-				},
-				{field:'salesDegree',title:'学历',align:'center',width:100,formatter:function(value, row, index){
-				    if(row.salesDegree){
-				        return  row.salesDegree.degreename;
+		        {field:'visitid',title:'编号',width:100},   
+		        {field:'visitcontext',title:'信息 ',width:100},   
+		        {field:'visittime',title:'咨询时间 ',width:100},   
+		        {field:'result',title:'结果',align:'center',width:100,formatter:function(value, row, index){
+				    if(row.result){
+				        return  row.result.resultname;
 				      }
 				    },
 				},
-				{field:'tel',title:'电话',width:100,align:'center'},
-				{field:'salesComfrom',title:'渠道',width:100,align:'center',formatter:function(value, row, index){
-				    if(row.salesComfrom){
-				        return  row.salesComfrom.comefromname;
+				{field:'userInfo',title:'咨询师',width:100,align:'center',formatter:function(value, row, index){
+				    if(row.userInfo){//对象不null
+				        return  row.userInfo.truename;
 				      }
 				    },
 				},
-				{field:'salesInfotype',title:'信息类型',width:100,align:'center',formatter:function(value, row, index){
-				    if(row.salesInfotype){
-				        return  row.salesInfotype.infotypename;
+				{field:'info',title:'咨询人 ',width:100,align:'center',formatter:function(value, row, index){
+				    if(row.info){
+				        return  row.info.infoname;
 				      }
 				    },
 				},
+				
 				{field:'xxx',title:'操作',width:100,align:'center',formatter: function(value,row,index){
 					var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.infoid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">remove</a>";
 					btns += "&nbsp;&nbsp;&nbsp;&nbsp;<a id=\"btn\" href=\"javascript:updateItem("+row.infoid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">update</a>";
@@ -76,10 +60,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}); 
 	});
 	
-	function deleteItem(infoid){
+	function deleteItem(visitid){
 		$.messager.confirm('Confirm','你确定要删除这条记录吗?',function(r){
 		    if (r){   
-		       $.getJSON("<%=basePath%>admin/saleInfo/delete",{infoid:infoid},function(json){
+		       $.getJSON("<%=basePath%>admin/visit/delete",{visitid:visitid},function(json){
 		    	   $('#dg').datagrid('reload'); 
 		    	   $.messager.show({
 		    			title:'My Title',
@@ -91,12 +75,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    }   
 		});  
 	}
+	function showsave(){
+		$('#ff').form('clear');	// 从URL加载 
 
+
+		$('#win').window('open');  // open a window   
+
+	}
+	
+	function dosave(){
+		$('#ff').form('submit', {   
+		    url:'<%=basePath%>admin/visit/save',   
+		    onSubmit: function(){   
+		        // do some check   
+		        // return false to prevent submit;   
+		    },   
+		    success:function(data){   
+		         var json = eval("("+data+")");
+		         $('#dg').datagrid('reload');    // reload the current page data  
+		    	   $.messager.show({
+		    			title:'My Title',
+		    			msg:json.msg,
+		    			timeout:5000,
+		    			showType:'slide'
+		    		});
+		    	   $('#win').window('close');  // close a window  
+
+		    }   
+		});  
+
+		
+	}
 </script>
 <body>
 
 
 <table id="dg"></table>
+  
+  
+           
 <script type="text/javascript">  
     function qq(value,name){   
         alert(value+":"+name)   
@@ -112,10 +129,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div> 
 
 <div id="tb">
-<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">增加</a>
-<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">批量删除</a>
+<a href="javascript:showsave()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">增加</a>
 </div>
-
+<div id="win" class="easyui-window" title="My Window" style="width:600px;height:400px"  
+        data-options="iconCls:'icon-save',modal:true,closed:true">  
+    <form id="ff" method="post">  
+    <div>  
+        <label for="name">Name:</label>  
+        <input class="easyui-validatebox" type="text" name="uname" data-options="required:true" />  
+    </div>  
+    <div>  
+        <label for="email">Email:</label>  
+        <input class="easyui-validatebox" type="text" name="upass" data-options="validType:'email'" />  
+    </div>  
+    <div>  
+        <a id="btn" href="javascript:dosave()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">维护</a>  
+        
+    </div>     
+</form>  
+   
+</div> 
 
 </body>
+
+
 </html>

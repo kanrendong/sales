@@ -13,6 +13,9 @@
     <result column="visitcontext" property="visitcontext" jdbcType="VARCHAR" />
     <result column="infoid" property="infoid" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="INTEGER" />
+    <association property="result" column="resultid" select="com.woniuxy.mapper.SalesResultMapper.selectByPrimaryKey" />
+    <association property="info" column="infoid" select="com.woniuxy.mapper.SaleInfoMapper.selectByPrimaryKey" />
+    <association property="userInfo" column="uid" select="com.woniuxy.mapper.SalesUserinfoMapper.selectByPrimaryKey" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <!--
