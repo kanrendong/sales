@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	$(function(){
 		$('#dg').datagrid({   
-		    url:'<%=basePath%>saleInfo_findAll',   
+		    url:'<%=basePath%>saleInfo/findAll',   
 		    fitColumns:true,
 		    title:'用户管理',
 		    pagination:true,
@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				},
 				{field:'xxx',title:'操作',width:100,align:'center',formatter: function(value,row,index){
 					var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.infoid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">remove</a>";
-					btns += "&nbsp;&nbsp;&nbsp;&nbsp;<a id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">update</a>";
+					btns += "&nbsp;&nbsp;&nbsp;&nbsp;<a id=\"btn\" href=\"javascript:updateItem("+row.infoid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">update</a>";
 					return btns;
 				}} 
 		    ]],
@@ -77,9 +77,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 	
 	function deleteItem(infoid){
-		$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){   
+		$.messager.confirm('Confirm','你确定要删除这条记录吗?',function(r){
 		    if (r){   
-		       $.getJSON("saleInfo_delete",{infoid:infoid},function(json){
+		       $.getJSON("<%=basePath%>saleInfo/delete",{infoid:infoid},function(json){
 		    	   $('#dg').datagrid('reload'); 
 		    	   $.messager.show({
 		    			title:'My Title',
@@ -91,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    }   
 		});  
 	}
-	
+
 </script>
 <body>
 

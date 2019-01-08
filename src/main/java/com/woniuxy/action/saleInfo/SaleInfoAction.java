@@ -18,12 +18,13 @@ import com.woniuxy.service.SaleInfoService;
 import com.woniuxy.util.Message;
 
 @Controller
+@RequestMapping("/saleInfo")
 public class SaleInfoAction {
 
 	@Resource
 	private SaleInfoService saleInfoService;
 	
-	@RequestMapping("saleInfo_findAll")
+	@RequestMapping("findAll")
 	public @ResponseBody Map findAll(Page page){
 		List<SaleInfo> list = saleInfoService.findAll(page);
 		int total =saleInfoService.countAll();
@@ -33,7 +34,7 @@ public class SaleInfoAction {
 		return map;
 	}
 	
-	@RequestMapping("userinfo_delete")
+	@RequestMapping("delete")
 	public @ResponseBody Message delete(SaleInfo info){
 		Message msg = null;
 		try{

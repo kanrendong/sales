@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	div, p, table, th, td {
 		list-style:none;
 		margin:0; padding:0;
-		color:#333; font-size:12px;
+		color:#333; font-size:18px;
 		font-family:dotum, Verdana, Arial, Helvetica, AppleGothic, sans-serif;
 	}
 	#testIframe {margin-left: 10px;}

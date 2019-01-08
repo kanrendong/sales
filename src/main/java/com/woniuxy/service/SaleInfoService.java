@@ -30,7 +30,7 @@ public class SaleInfoService {
 	}
 	@Transactional
 	public void delete(SaleInfo info){
-		saleInfoMapper.deleteByPrimaryKey(info.getUid());
+		saleInfoMapper.deleteByPrimaryKey(info.getInfoid());
 	}
 	@Transactional(readOnly=true)
 	public SaleInfo findById(Integer infoid){
@@ -45,4 +45,12 @@ public class SaleInfoService {
 	public int countAll(){
 		return saleInfoMapper.countByExample(null);
 	}
+	
+	public static void main(String[] args) {
+		SaleInfoService s = new SaleInfoService();
+		SaleInfo info = new SaleInfo();
+		info.setInfoid(50420);
+		s.delete(info);
+	}
+	
 }
