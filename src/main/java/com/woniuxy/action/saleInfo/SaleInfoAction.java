@@ -1,6 +1,5 @@
 package com.woniuxy.action.saleInfo;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,5 +42,11 @@ public class SaleInfoAction {
 			msg = new Message(false, "用户删除成功失败啦！！！"+ex);
 		}
 		return msg;
+	}
+	
+	@RequestMapping("/saveSaleInfo")
+	public String saveSaleInfo() {
+		
+		return "redirect:/admin/saleInfo/saveSaleInfo.jsp";
 	}
 }
