@@ -1,4 +1,4 @@
-package com.woniuxy.util;
+ï»¿package com.woniuxy.util;
 
 import java.sql.Connection;
 import java.util.Properties;
@@ -24,17 +24,17 @@ public class PageInterceptor implements Interceptor{
 		
 		MetaObject meta = MetaObject.forObject(stmt, new DefaultObjectFactory(), new DefaultObjectWrapperFactory());
 		
-		RowBounds rowBounds = (RowBounds) meta.getValue("delegate.rowBounds");//·µ»ØÔª¶ÔÏóÖĞµÄRowBounds¶ÔÏó
+		RowBounds rowBounds = (RowBounds) meta.getValue("delegate.rowBounds");//è¿”å›å…ƒå¯¹è±¡ä¸­çš„RowBoundså¯¹è±¡
 		
-		if(rowBounds!=null&&rowBounds!=RowBounds.DEFAULT){//RowBoundsÓĞÖµ£¬Êı¾İ»¹±»ÖØĞÂÉèÖÃ¹ı£¬Ö¤Ã÷ÄãÒª·ÖÒ³ÁË
-			//¸ü¸ÄSQLÓï¾ä
-			String originalSql = (String) meta.getValue("delegate.boundSql.sql");//µÃµ½Ô­À´ÄãÒªÖ´ĞĞµÄSQLÓï¾ä
+		if(rowBounds!=null&&rowBounds!=RowBounds.DEFAULT){//RowBoundsæœ‰å€¼ï¼Œæ•°æ®è¿˜è¢«é‡æ–°è®¾ç½®è¿‡ï¼Œè¯æ˜ä½ è¦åˆ†é¡µäº†
+			//æ›´æ”¹SQLè¯­å¥
+			String originalSql = (String) meta.getValue("delegate.boundSql.sql");//å¾—åˆ°åŸæ¥ä½ è¦æ‰§è¡Œçš„SQLè¯­å¥
 			
-			int offset = rowBounds.getOffset();//Ô­ÀíRowBoundssÀïÃæµÄOffset
-			int limit = rowBounds.getLimit();//Ô­ÀíRowBoundssÀïÃæµÄrows
-			meta.setValue("delegate.boundSql.sql",originalSql+" limit "+offset+","+limit+"");//ÖØĞÂÉèÖÃ·ÖÒ³µÄSQLÓï¾ä
-			meta.setValue("delegate.rowBounds.offset", RowBounds.NO_ROW_OFFSET);//ÉèÖÃÔ­ÓĞµÄ·ÖÒ³µÄ²ÎÊıÎª³õÊ¼»¯
-			meta.setValue("delegate.rowBounds.limit", RowBounds.NO_ROW_LIMIT);//ÉèÖÃÔ­ÓĞµÄ·ÖÒ³µÄ²ÎÊıÎª³õÊ¼»¯
+			int offset = rowBounds.getOffset();//åŸç†RowBoundssé‡Œé¢çš„Offset
+			int limit = rowBounds.getLimit();//åŸç†RowBoundssé‡Œé¢çš„rows
+			meta.setValue("delegate.boundSql.sql",originalSql+" limit "+offset+","+limit+"");//é‡æ–°è®¾ç½®åˆ†é¡µçš„SQLè¯­å¥
+			meta.setValue("delegate.rowBounds.offset", RowBounds.NO_ROW_OFFSET);//è®¾ç½®åŸæœ‰çš„åˆ†é¡µçš„å‚æ•°ä¸ºåˆå§‹åŒ–
+			meta.setValue("delegate.rowBounds.limit", RowBounds.NO_ROW_LIMIT);//è®¾ç½®åŸæœ‰çš„åˆ†é¡µçš„å‚æ•°ä¸ºåˆå§‹åŒ–
 		}
 		
 		Object obj = arg0.proceed();
@@ -49,6 +49,10 @@ public class PageInterceptor implements Interceptor{
 	@Override
 	public void setProperties(Properties arg0) {
 		
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("hah");
 	}
 
 }
