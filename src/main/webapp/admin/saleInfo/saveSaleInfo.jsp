@@ -19,17 +19,106 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 <body>
-<div style="margin-left:200px;margin-top:20px;width:700px">
-<div class="input-group input-group-lg">
-  <span class="input-group-addon" id="sizing-addon1">姓名</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+<!-- 录入信息的日期即为该咨询量产生的日期
+表单信息：咨询日期、姓名、性别、年龄、学历、联系方式、渠道、TMK、咨询师
+类别：定义的类别是那种，现在需要确定好 A B C D是否可以！OK
+ -->
+
+<div style="margin-left:60px;margin-top:20px;width:700px;height:600px">
+
+<div style="margin-left:15px;">
+<form  action="uploadFile" method="post"  enctype="multipart/form-data">
+<div class="row">
+  <div class="input-group">
+    <div class="input-group">
+      <input type="file" name="file" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">导入Excel文件</button>
+      </span>
+    </div>
+  </div>
 </div>
+</form></div>
 
 
-
-
-
-
+<p><p><p>
+<hr>
+	<form action="saveInfomation" method="post">
+		<div class="input-group input-group-lg">
+		  <span class="input-group-addon" id="sizing-addon1">咨询日期</span>
+		  <input type="text" class="form-control" name="infodate" placeholder="2018/12/12" aria-describedby="sizing-addon1">
+		</div><p>
+		
+		<div class="input-group input-group-lg">
+	  	<span class="input-group-addon" id="sizing-addon1">姓名</span>
+	  	<input type="text" class="form-control" name="infoname"  aria-describedby="sizing-addon1"><p>
+	  	</div>
+	
+		<div class="radio">
+		 <button type="button" class="btn btn-large">性别</button>
+		
+		<label>
+		<input type="radio" name="sex" value="1" checked>男
+		</label>
+		<label>
+		<input type="radio" name="sex"  value="0">女
+		</label></div>
+	
+			<div class="input-group input-group-lg">
+			  <span class="input-group-addon" id="sizing-addon1">年龄</span>
+			  <input type="text" class="form-control" name="age"  aria-describedby="sizing-addon1">
+			</div>
+		
+		<div class="radio">	
+		<button type="button" class="btn btn-large">学历</button>
+		<label>
+		<input type="radio" name="degreeid" value="1" checked>其他
+		</label>
+		<label>
+		<input type="radio" name="degreeid"  value="2">初中
+		</label>
+		<label>
+		<input type="radio" name="degreeid"  value="3">高中
+		</label>
+		<label>
+		<input type="radio" name="degreeid"  value="4">中专
+		</label>
+		<label>
+		<input type="radio" name="degreeid"  value="5">大专
+		</label>
+		<label>
+		<input type="radio" name="degreeid"  value="6">本科
+		</label>
+		<label>
+		<input type="radio" name="degreeid"  value="7">硕士
+		</label></div>
+	
+		<div class="input-group input-group-lg">
+		  <span class="input-group-addon" id="sizing-addon1">联系方式</span>
+		  <input type="text" class="form-control" name="tel"  aria-describedby="sizing-addon1">
+		</div><p>
+		
+		<div class="radio">	
+		<button type="button" class="btn btn-large">渠道</button>
+		<label>
+		<input type="radio" name="comefromid" value="1" checked>其他
+		</label>
+		<label>
+		<input type="radio" name="comefromid"  value="2">赶集
+		</label></div>
+		
+		<div class="input-group input-group-lg">
+		<span class="input-group-addon" id="sizing-addon1">TMK</span>
+		<input type="text" class="form-control" name="beforetmk"  aria-describedby="sizing-addon1"><p>
+		</div><p>
+	
+		<div class="input-group input-group-lg">
+		  <span class="input-group-addon" id="sizing-addon1">咨询师</span>
+		  <input type="text" class="form-control" name="uid"  aria-describedby="sizing-addon1">
+		</div><p>
+		<p>
+		<button type="submit" class="btn btn-large">录入信息</button>
+	</form>
 </div>
 </body>
 </html>
