@@ -82,6 +82,7 @@ public class SaleInfoAction {
 				if (file != null) {
 					String currentPath = new File("").getCanonicalPath();
 					String path = currentPath+"/" + file.getOriginalFilename();
+					
 					// ÉÏ´«
 					file.transferTo(new File(path));
 					ParseExcel.parseExcel(path);
