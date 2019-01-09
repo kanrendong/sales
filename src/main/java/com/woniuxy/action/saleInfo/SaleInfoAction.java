@@ -21,6 +21,7 @@ import com.woniuxy.domain.Page;
 import com.woniuxy.domain.SaleInfo;
 import com.woniuxy.service.SaleInfoService;
 import com.woniuxy.util.Message;
+import com.woniuxy.util.ParseExcel;
 
 @Controller
 @RequestMapping("admin/saleInfo")
@@ -79,9 +80,11 @@ public class SaleInfoAction {
 				// 一次遍历所有文件
 				MultipartFile file = multiRequest.getFile(iter.next().toString());
 				if (file != null) {
-					String path = "D:/share" + file.getOriginalFilename();
+					String currentPath = new File("").getCanonicalPath();
+					String path = currentPath+"/" + file.getOriginalFilename();
 					// 上传
 					file.transferTo(new File(path));
+					ParseExcel.parseExcel(path);
 				}
 
 			}

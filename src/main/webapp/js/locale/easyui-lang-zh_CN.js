@@ -1,10 +1,10 @@
-if ($.fn.pagination){
+﻿if ($.fn.pagination){
 	$.fn.pagination.defaults.beforePageText = '第';
 	$.fn.pagination.defaults.afterPageText = '共{pages}页';
 	$.fn.pagination.defaults.displayMsg = '显示{from}到{to},共{total}记录';
 }
 if ($.fn.datagrid){
-	$.fn.datagrid.defaults.loadMsg = '老子正在泡数据，等着。。。';
+	$.fn.datagrid.defaults.loadMsg = '正在加载数据，请稍等...';
 }
 if ($.fn.treegrid && $.fn.datagrid){
 	$.fn.treegrid.defaults.loadMsg = $.fn.datagrid.defaults.loadMsg;
