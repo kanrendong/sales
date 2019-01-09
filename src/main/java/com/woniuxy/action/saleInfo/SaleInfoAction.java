@@ -90,7 +90,7 @@ public class SaleInfoAction {
 			}
 
 		}
-		return "/success";
+		return "admin/saleInfo/success";
 	}
 
 }
