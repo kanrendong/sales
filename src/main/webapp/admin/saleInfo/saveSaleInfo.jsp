@@ -24,7 +24,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 类别：定义的类别是那种，现在需要确定好 A B C D是否可以！OK
  -->
 
+
 <div style="margin-left:60px;margin-top:20px;width:700px;height:600px">
+
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>导入成功!</strong> 
+</div>
 
 <div style="margin-left:15px;">
 <form  action="uploadFile" method="post"  enctype="multipart/form-data">

@@ -2,4 +2,9 @@
 /.settings/
 .classpath
 .project
+<<<<<<< HEAD
 .gitignore
+=======
+*.class
+.class
+>>>>>>> branch 'master' of https://github.com/kanrendong/sales.git

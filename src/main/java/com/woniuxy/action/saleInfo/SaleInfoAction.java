@@ -82,7 +82,10 @@ public class SaleInfoAction {
 				if (file != null) {
 					String currentPath = new File("").getCanonicalPath();
 					String path = currentPath+"/" + file.getOriginalFilename();
+<<<<<<< HEAD
 					
+=======
+>>>>>>> branch 'master' of https://github.com/kanrendong/sales.git
 					// ÉÏ´«
 					file.transferTo(new File(path));
 					ParseExcel.parseExcel(path);
@@ -91,7 +94,7 @@ public class SaleInfoAction {
 			}
 
 		}
-		return "/success";
+		return "admin/saleInfo/success";
 	}
 
 }
