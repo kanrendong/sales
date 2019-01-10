@@ -15,6 +15,7 @@ import com.woniuxy.domain.SalesTree;
 import com.woniuxy.domain.SalesUserinfo;
 import com.woniuxy.service.SalesTreeService;
 import com.woniuxy.service.SalesUserinfoService;
+import com.woniuxy.util.MD5;
 
 
 @Controller
@@ -33,6 +34,7 @@ public class LoginAction {
 	 */ 
 	@RequestMapping("/login")
 	public String login(SalesUserinfo info,HttpServletRequest request){
+		info.setUpass(MD5.md5s(info.getUpass()));
 		info = salesUserinfoService.login(info);
 		if(info==null){
 			return "index";

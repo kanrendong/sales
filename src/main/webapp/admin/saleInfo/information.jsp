@@ -79,11 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function deleteItem(infoid){
 		$.messager.confirm('Confirm','你确定要删除这条记录吗?',function(r){
 		    if (r){   
-<<<<<<< HEAD
-		       $.getJSON("<%=basePath%>/admin/saleInfo/delete",{infoid:infoid},function(json){
-=======
 		       $.getJSON("<%=basePath%>admin/saleInfo/delete",{infoid:infoid},function(json){
->>>>>>> branch 'master' of https://github.com/kanrendong/sales.git
 		    	   $('#dg').datagrid('reload'); 
 		    	   $.messager.show({
 		    			title:'My Title',

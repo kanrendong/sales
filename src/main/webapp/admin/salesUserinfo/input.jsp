@@ -10,14 +10,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		<c:forEach items="${userinfo.roles}" var="r">
-		$("input[name=rids][value=${r.rid}]").attr("checked","checked");
+		<c:forEach items="${userinfo.salesRole}" var="r">
+		$("input[name=roleids][value=${r.roleid}]").attr("checked","checked");
 		</c:forEach>
 	});
 
 </script>
   
-<FORM METHOD=POST ACTION="${userinfo==null?'save':'update'}">
+<FORM METHOD=POST ACTION="<%=basePath%>admin/salesUserinfo/${userinfo==null?'save':'update'}">
 <input type="hidden" name="uid" value="${userinfo.uid }">
 uname	<INPUT TYPE="text" NAME="uname" value="${userinfo.uname }"><br>
 truename	<INPUT TYPE="text" NAME="truename"><br>

@@ -39,14 +39,14 @@ public class SalesUserinfoAction {
 		Map map = new HashMap();
 		map.put("total", total);
 		map.put("rows", list);
-		//List salesRole = salesRoleService.findAll();
-		//map.put("salesRole", salesRole);
+		List salesRole = salesRoleService.findAll();
+		map.put("salesRole", salesRole);
 		return map;
 	}
 	
 	@RequestMapping("save")
 	public String save(SalesUserinfo info,int[] roleids){
-		//info.setUpass(MD5.md5s(info.getUpass()));
+		info.setUpass(MD5.md5s(info.getUpass()));
 		salesUserinfoService.save(info, roleids);
 		return "redirect:findAll";
 	}
@@ -65,8 +65,8 @@ public class SalesUserinfoAction {
 	
 	@RequestMapping("update")
 	public String update(SalesUserinfo info,int[] roleids){
-		//if(info.getUpass()!=null)
-			//info.setUpass(MD5.md5s(info.getUpass()));
+		if(info.getUpass()!=null)
+			info.setUpass(MD5.md5s(info.getUpass()));
 		salesUserinfoService.update(info, roleids);
 		return "redirect:findAll";
 	}
@@ -77,7 +77,7 @@ public class SalesUserinfoAction {
 		return "forward:goInput";
 	}
 	
-	@RequestMapping("/goInput")
+	@RequestMapping("goInput")
 	public String goInput(ModelMap map){
 		List salesRole = salesRoleService.findAll();
 		map.put("salesRole", salesRole);

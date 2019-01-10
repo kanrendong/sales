@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        
 				{field:'xxx',title:'操作',width:100,align:'center',formatter: function(value,row,index){
 					var btns = "<a id=\"btn\" href=\"javascript:deleteItem("+row.uid+")\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-remove'\">remove</a>";
-					btns += "&nbsp;&nbsp;&nbsp;&nbsp;<a id=\"btn\" href=\"<%=basePath%>admin/salesUserinfo/findById\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">update</a>";
+					btns += "&nbsp;&nbsp;&nbsp;&nbsp;<a id=\"btn\" href=\"<%=basePath%>admin/salesUserinfo/findById?uid="+row.uid+"\" class=\"easyui-linkbutton\" data-options=\"iconCls:'icon-edit'\">update</a>";
 					return btns;
 				}} 
 		    ]],
@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div> 
 
 <div id="tb">
-<a href="<%=basePath%>admin/salesUserinfo/findById?uid=${userinfo.uid }" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">增加</a>
+<a href="<%=basePath%>admin/salesUserinfo/goInput" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">增加</a>
 </div>
 
 
